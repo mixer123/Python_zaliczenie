@@ -7,14 +7,15 @@ def read_file(file, header=True):
     header_list=[]
     with open(file, mode ='r') as file:
         lines = file.readlines()
+
         if header:
             header_list.append(lines[0].replace('\n',''))
             return header_list
-    return header_list
+    return header_list, file
 
 # Wypisanie etykiet – funkcja wypisująca etykiety lub komunikat, że etykiet nie było w danym datasecie
 def label(file):
-    if len(read_file(file, False)) == 0:
+    if len(read_file(file, False)[0]) == 0:
         return 'Brak etykiet'
     return [lab for lab in read_file(file)[0].split(',')]
 
@@ -23,7 +24,31 @@ def label(file):
 # zostać wyświetlony (na wzór slice)
 
 def show_data(*args):
-    pass
-print(label('iris.csv'))
+    if len(args)==3:
+        var1 = args[0]
+        var2 = args[1]
+        file = args[2]
+        with open(file, mode='r') as file:
+            lines = file.readlines()[var1:var2]
+            for el in lines:
+                print(el)
+    if len(args) == 1:
+        file = args[0]
+        with open(file, mode='r') as file:
+            lines = file.readlines()
+            for el in lines:
+                print(el)
 
-read_file('iris.csv')
+# Podział datasetu na zbiór treningowy, testowy i walidacyjny. Funkcja przyjmuje 3 parametry określające
+# procentowo jaka część głównego zbioru danych trafia do poszczególnych zbiorów
+
+def trening(tr,t,w,file):
+    pass
+
+
+# read_file('iris.csv')
+show_data('iris.csv')
+
+
+# print(label('iris.csv'))
+#
