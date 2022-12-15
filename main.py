@@ -96,15 +96,23 @@ def count_decide_clas(file,sep):
 '''Wypisz dane dla podanej wartości klasy decyzyjnej – wypisuje wiersze 
 z zadaną wartością klasy decyzyjnej.'''
 
-def row_for_decide_clas(file, sep):
-    pass
+def row_for_decide_clas(file, sep, value_clas):
+    list_row =[]
+    with open(file, mode='r') as file:
+        lines = file.readlines()
+        for line in lines:
+            if value_clas == line.split(sep)[-1].replace('\n', ''):
+                list_row.append(line[:-2])
+        return list_row
 
 
 '''Zapisanie danych do pliku csv – jako parametr przyjmowana jest dowolna lista, 
 która może być podzbiorem datasetu, zmienną przechowującą dane treningowe, itp. 
 Dodatkowo podawana jest nazwa pliku, do którego dane zostaną zapisane.'''
 
-print(count_decide_clas('iris.csv',','))
+# print(name_decide_clas('iris.csv',','))
+print(row_for_decide_clas('iris.csv', ',', 'Iris-setosa'))
+# print(count_decide_clas('iris.csv',','))
 # training('iris.csv', 1,2,1)
 # print(name_decide_clas('iris.csv',','))
 # print(training('iris.csv', 15,80,5)[0])
