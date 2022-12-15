@@ -71,7 +71,7 @@ def training(file, tr=15,t=80,w=5):
 to wartość klasy (np. nazwa irysa,
 dla binarnych 0 lub 1 itd.), a druga to liczebność (kardynalność) tej klasy"""
 
-def decide_clas(file,sep):
+def name_decide_clas(file,sep):
     file = read_file(file,header = True, sep=sep)[1]
     name_of_clas = set()
     with open(file, mode='r') as file:
@@ -79,10 +79,24 @@ def decide_clas(file,sep):
         for line in lines:
             name_of_clas.add(line.split(sep)[-1].replace('\n',''))
     return name_of_clas
+def count_decide_clas(file,sep):
+    name_of_clas = list(name_decide_clas(file,sep))
+    decide_clas_dict = {}
+    for el in name_of_clas:
+        decide_clas_dict[el] = 0
+    with open(file, mode='r') as file:
+        lines = file.readlines()
+        for line in lines:
+            for i in range(len(name_of_clas)):
+                if name_of_clas[i] == line.split(sep)[-1].replace('\n',''):
+                    decide_clas_dict[name_of_clas[i]] += 1
+        return list(decide_clas_dict.items())
 
 
+
+print(count_decide_clas('iris.csv',','))
 # training('iris.csv', 1,2,1)
-print(decide_clas('iris.csv',','))
+# print(name_decide_clas('iris.csv',','))
 # print(training('iris.csv', 15,80,5)[0])
 # print(read_file('iris.csv',True)[1])
 # show_data('iris.csv')
