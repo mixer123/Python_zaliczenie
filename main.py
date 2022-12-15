@@ -93,6 +93,16 @@ def count_decide_clas(file,sep):
         return list(decide_clas_dict.items())
 
 
+'''Wypisz dane dla podanej wartości klasy decyzyjnej – wypisuje wiersze 
+z zadaną wartością klasy decyzyjnej.'''
+
+def row_for_decide_clas(file, sep):
+    pass
+
+
+'''Zapisanie danych do pliku csv – jako parametr przyjmowana jest dowolna lista, 
+która może być podzbiorem datasetu, zmienną przechowującą dane treningowe, itp. 
+Dodatkowo podawana jest nazwa pliku, do którego dane zostaną zapisane.'''
 
 print(count_decide_clas('iris.csv',','))
 # training('iris.csv', 1,2,1)
