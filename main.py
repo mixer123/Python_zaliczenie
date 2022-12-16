@@ -21,11 +21,12 @@ def read_file(filename,header = True, sep=','):
 
 
 # Wypisanie etykiet – funkcja wypisująca etykiety lub komunikat, że etykiet nie było w danym datasecie
-def label(file, header=True):
+def label(file, header):
+
     if  read_file(file,header,',')[3]==False:
         return 'Brak etykiet'
     # sep = read_file(file)[2]
-    return [lab for lab in read_file(file)[0]]
+    return read_file(file)[0]
 
 # Wypisanie danych datasetu – funkcja wypisuje kolejne wiersze datasetu. Bez podania parametrów
 # wypisywany jest cały dataset, ale możliwe też podanie 2 parametrów, które określają przedział, który ma
@@ -52,10 +53,11 @@ def show_data(*args):
 # Podział datasetu na zbiór treningowy, testowy i walidacyjny. Funkcja przyjmuje 3 parametry określające
 # procentowo jaka część głównego zbioru danych trafia do poszczególnych zbiorów
 
-def training(file, tr=15,t=80,w=5):
-    tr = int(input('Podaj tr trening'))
-    t = int(input('Podaj t test'))
-    w = int(input('Podaj w walidacja'))
+def training(file, tr=10,t=70,w=20):
+    # while tr + t + w != 100:
+    #     tr = int(input('Podaj tr trening'))
+    #     t = int(input('Podaj t test'))
+    #     w = int(input('Podaj w walidacja'))
 
 
     file = read_file(file, True )[1]
@@ -129,25 +131,28 @@ def inside_dataset(fileopen,filewrite, list_part=[]):
     return list_part
 
 '''Menu programu'''
-
-while True:
-    print('w - wczytaj plik')
-    print('l - wypisanie etykiet')
-    print('s - Wypisanie danych datasetu')
-    print('p - Podział datasetu')
-    print('q - exit')
-
-    key = input('Podaj klucz z klawiatury:  ')
-    if key == 'w':
-        print(read_file('iris.csv', True))
-    if key == 'l':
-        print(label(read_file('iris.csv')[1]))
-    if key == 'l':
-        print(show_data('iris.csv'))
-    if key == 'p':
-        training('iris.csv')
-    if key == 'q':
-        break
+#
+# while True:
+#     print('w - wczytaj plik')
+#     print('l - wypisanie etykiet')
+#     print('s - Wypisanie danych datasetu')
+#     print('p - Podział datasetu')
+#     print('r - Wypisz liczbę klas decyzyjnych ')
+#     print('q - exit')
+#
+#     key = input('Podaj klucz z klawiatury:  ')
+#     if key == 'w':
+#         print(read_file('iris.csv', True))
+#     if key == 'l':
+#         print(label(read_file('iris.csv')[1]))
+#     if key == 'l':
+#         print(show_data('iris.csv', False))
+#     if key == 'p':
+#         training(read_file('iris.csv',header = True, sep=',')[1])
+#     if key == 'r':
+#         print(count_decide_clas(read_file('iris.csv',header = True, sep=',')[1], read_file('iris.csv',header = True, sep=',')[2]))
+#     if key == 'q':
+#         break
 
 
 
@@ -161,6 +166,6 @@ while True:
 # print(read_file('iris.csv',True))
 # show_data('iris.csv')
 
-
-print(label(read_file('iris.csv',False)[1]))
+print(read_file('iris.csv',True)[3])
+print(label(read_file('iris.csv',True)[1], read_file('iris.csv',True)[0]))
 #
